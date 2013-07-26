@@ -13,8 +13,15 @@ class mongodb::params{
         'upstart' => 'http://downloads-distro.mongodb.org/repo/ubuntu-upstart'
       }
       case $::operatingsystem {
-        'Debian': { $init = 'sysv' }
-        'Ubuntu': { $init = 'upstart' }
+        'Debian': {
+          $init = 'sysv'
+        }
+        'Ubuntu': {
+          $init = 'upstart'
+        }
+        default {
+          fail("Module ${module_name} is not supported on ${::operatingsystem}")
+        }
       }
       $source  = 'mongodb::sources::apt'
       $package = 'mongodb'
