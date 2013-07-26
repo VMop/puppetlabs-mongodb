@@ -77,8 +77,8 @@ class mongodb (
   }
 
   package { 'mongodb-10gen':
-    name   => $package,
     ensure => installed,
+    name   => $package,
   }
 
   file { '/etc/mongod.conf':
@@ -90,8 +90,8 @@ class mongodb (
   }
 
   service { 'mongodb':
-    name      => $servicename,
     ensure    => running,
+    name      => $servicename,
     enable    => true,
     subscribe => File['/etc/mongod.conf'],
   }
